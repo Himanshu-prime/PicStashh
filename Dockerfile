@@ -1,25 +1,15 @@
-# Build stage
-FROM node:18 AS build
+# Use whatever version you are running locally (see node -v)
+FROM node:18 AS base
 
 WORKDIR /app
 
+# Install dependencies (you are already in /app)
 COPY package.json package-lock.json ./
 RUN npm ci
 
-COPY . .
-
-RUN npm run build
-
-# Production stage
-FROM node:18-alpine
-
+# Second stage, copy source code and run application
+FROM base AS final
 WORKDIR /app
-
-COPY package.json ./
-RUN npm ci --only=production
-
-COPY --from=build /app/build /app/build
-
+COPY . .
 EXPOSE 3000
-
 CMD ["npm", "start"]
