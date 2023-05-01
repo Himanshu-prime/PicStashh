@@ -1,15 +1,24 @@
-# Use whatever version you are running locally (see node -v)
-FROM node:18
+# Build stage
+FROM node:18 AS build
 
 WORKDIR /app
 
-# Install dependencies (you are already in /app)
 COPY package.json package-lock.json ./
-CMD ["npm", "install"]
+RUN npm ci
 
-# Add rest of the client code
-# .dockerignore needs to skip node_modules
-COPY . /app
+COPY . .
+
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package.json ./
+RUN npm ci --only=production
+
+COPY --from=build /app/build /app/build
 
 EXPOSE 3000
 
