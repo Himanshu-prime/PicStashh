@@ -1,16 +1,9 @@
-# Use whatever version you are running locally (see node -v)
-FROM node:18
+FROM node:alpine AS build
+WORKDIR /client
+COPY package.json .
+RUN npm i
+COPY . .
+RUN npm run build
 
-WORKDIR /app
-
-# Install dependencies (you are already in /app)
-COPY package.json ./
-RUN npm install
-
-# Add rest of the client code
-# .dockerignore needs to skip node_modules
-COPY . /app
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
+FROM nginx
+COPY --from=build /client/build /usr/share/nginx/html
