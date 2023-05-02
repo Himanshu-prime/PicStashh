@@ -1,5 +1,5 @@
 FROM node:18
-RUN npm update core-js svgo
+
 WORKDIR app
 
 COPY package.json package-lock.json ./
