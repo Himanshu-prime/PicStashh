@@ -1,8 +1,10 @@
-FROM node:12.2.0-alpine
+FROM node:18
 RUN npm update core-js svgo
 WORKDIR app
+
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
-RUN npm install
 
 
 
