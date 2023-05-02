@@ -4,7 +4,7 @@ FROM node:18
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json ./
+COPY package.json  ./
 
 # Cache dependencies
 RUN npm config set cache /app/.npm-cache --global \
