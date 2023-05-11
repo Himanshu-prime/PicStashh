@@ -56,7 +56,7 @@ const Login = () => {
         maxWidth: "450px",
         alignContent: "center",
         marginTop: "120px",
-        marginBottom:"8rem"
+        marginBottom:"8rem",
         backgroundcolor:"blue"
       }}
     >
