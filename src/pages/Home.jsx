@@ -24,6 +24,7 @@ const Home = () => {
   return (
     <div
    className='container'
+    style={{backgroundColor:"blue"}}
   >
     <MDBRow className='row-cols-1 row-cols-md-2 g-4'>
       {posts.map((post) => 
