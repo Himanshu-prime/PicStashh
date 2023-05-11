@@ -57,6 +57,7 @@ const Login = () => {
         alignContent: "center",
         marginTop: "120px",
         marginBottom:"8rem"
+        backgroundcolor:"blue"
       }}
     >
       <MDBCard alignment="center pt-2">
